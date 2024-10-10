@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import '../css/Event.css'
+import EventsAPI from '../services/EventsAPI'
+import dates from '../services/dates'
 
 const Event = (props) => {
 
@@ -10,7 +12,14 @@ const Event = (props) => {
     useEffect(() => {
         (async () => {
             try {
-                const eventData = await EventsAPI.getEventsById(props.id)
+                const eventData = {
+                    image: props.image,
+                    title: props.title,
+                    date: props.date,
+                    id: props.id,
+                    remaining: props.remaining,
+                    time: props.time
+                }
                 setEvent(eventData)
             }
             catch (error) {
@@ -22,7 +31,7 @@ const Event = (props) => {
     useEffect(() => {
         (async () => {
             try {
-                const result = await dates.formatTime(event.time)
+                const result = dates.formatTime(event.time)
                 setTime(result)
             }
             catch (error) {
@@ -34,7 +43,7 @@ const Event = (props) => {
     useEffect(() => {
         (async () => {
             try {
-                const timeRemaining = await dates.formatRemainingTime(event.remaining)
+                const timeRemaining = dates.formatRemainingTime(event.date)
                 setRemaining(timeRemaining)
                 dates.formatNegativeTimeRemaining(remaining, event.id)
             }
@@ -42,7 +51,9 @@ const Event = (props) => {
                 throw error
             }
         }) ()
-    }, [event])
+    }, [remaining])
+
+
 
     return (
         <article className='event-information'>
