@@ -40,6 +40,10 @@ GIF created with ShareX
 [peek](https://github.com/phw/peek) for Linux. -->
 
 
+## Notes
+
+Describe any challenges encountered while building the app or any additional context you'd like to add.
+- Wasn't able to add image URLs since I created dummy data using Copilot
 
 ## License
 
